@@ -16,6 +16,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "pdfjs-dist"
+            ],
             "outputPath": "dist/ex-pdf-annotate",
             "index": "src/index.html",
             "main": "src/main.ts",
