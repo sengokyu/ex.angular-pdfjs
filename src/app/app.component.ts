@@ -110,6 +110,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   private updateBlobUrl(): void {
+    if (this.pdfBlobUrl) {
+      URL.revokeObjectURL(this.pdfBlobUrl as string);
+    }
+
     this.pdfBlobUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
       URL.createObjectURL(this.pdfBlob)
     );
@@ -127,5 +131,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     canvas.width = viewport.width;
 
     await page.render({ canvasContext, viewport }).promise;
+
+    URL.revokeObjectURL(url);
   }
 }
