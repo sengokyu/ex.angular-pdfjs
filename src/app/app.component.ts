@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { getDocument } from 'pdfjs-dist';
-import { PDFDocumentProxy } from 'pdfjs-dist/types/display/api';
+import * as pdfjs from 'pdfjs-dist';
 
 const PDF_FILE_NAME = '/assets/RoShinoStdAdobeFonts.pdf';
 
@@ -11,7 +10,7 @@ const PDF_FILE_NAME = '/assets/RoShinoStdAdobeFonts.pdf';
 })
 export class AppComponent implements AfterViewInit {
   @ViewChild('pdfCanvas')
-  pdfCanvas: { nativeElement: HTMLCanvasElement };
+  pdfCanvas!: { nativeElement: HTMLCanvasElement };
 
   async ngAfterViewInit(): Promise<void> {
     this.showPdfPage(this.pdfCanvas.nativeElement, PDF_FILE_NAME, 1, 1);
@@ -23,10 +22,10 @@ export class AppComponent implements AfterViewInit {
     scale: number,
     pageNumber: number
   ): Promise<void> {
-    const pdf = await getDocument(url).promise;
+    const pdf = await pdfjs.getDocument(url).promise;
     const page = await pdf.getPage(pageNumber);
     const viewport = page.getViewport({ scale });
-    const canvasContext = canvas.getContext('2d');
+    const canvasContext = canvas.getContext('2d')!;
 
     canvas.height = viewport.height;
     canvas.width = viewport.width;
