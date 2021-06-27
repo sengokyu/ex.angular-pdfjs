@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as pdfjs from 'pdfjs-dist';
 
 const PDF_FILE_NAME = '/assets/RoShinoStdAdobeFonts.pdf';
@@ -10,7 +10,7 @@ const PDF_FILE_NAME = '/assets/RoShinoStdAdobeFonts.pdf';
 })
 export class AppComponent implements AfterViewInit {
   @ViewChild('pdfCanvas')
-  pdfCanvas!: { nativeElement: HTMLCanvasElement };
+  pdfCanvas!: ElementRef<HTMLCanvasElement>;
 
   async ngAfterViewInit(): Promise<void> {
     this.showPdfPage(this.pdfCanvas.nativeElement, PDF_FILE_NAME, 1, 1);
