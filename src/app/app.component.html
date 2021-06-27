@@ -6,4 +6,24 @@
   />
   <span>Experimental PDF.JS</span>
 </div>
-<canvas #pdfCanvas></canvas>
+<div>
+  <a [href]="pdfBlobUrl" target="_blank">保存</a>
+</div>
+<!-- canvasで(click)が起きないので、外側でリッスンする -->
+<div #pdfCanvasContainer class="pdf-canvas-container" (click)="onClick($event)">
+  <img
+    #stamp
+    class="stamp"
+    src="/assets/stamp.png"
+    [style.display]="isShowingCursor ? 'block' : 'none'"
+    [style.top.px]="cursorPos.top"
+    [style.left.px]="cursorPos.left"
+  />
+  <canvas
+    #pdfCanvas
+    class="pdf-canvas"
+    (mouseenter)="onMouseEnter($event)"
+    (mouseleave)="onMouseLeave()"
+    (mousemove)="onMouseMove($event)"
+  ></canvas>
+</div>

@@ -1,0 +1,15 @@
+.pdf-canvas-container {
+  position: relative;
+  display: inline-block; /* canvasに横幅合わせるため */
+  overflow: hidden;
+}
+
+.pdf-canvas {
+  border: solid 1px gray;
+}
+
+.stamp {
+  position: absolute;
+  width: 128px;
+  height: 128px;
+}
